@@ -1,4 +1,4 @@
-FROM bitnami/bitnami-docker-jenkins:2.204.1-debian-9
+FROM bitnami/jenkins:2.204.1-debian-9
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
 

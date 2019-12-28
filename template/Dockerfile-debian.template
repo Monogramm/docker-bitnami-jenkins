@@ -1,4 +1,4 @@
-FROM bitnami/bitnami-docker-jenkins:%%VERSION%%-%%VARIANT%%
+FROM bitnami/jenkins:%%VERSION%%-%%VARIANT%%
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
 
