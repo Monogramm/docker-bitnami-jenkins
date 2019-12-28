@@ -28,7 +28,7 @@ Custom Docker Image for Bitnami Jenkins.
 
 [Dockerhub monogramm/docker-bitnami-jenkins](https://hub.docker.com/r/monogramm/docker-bitnami-jenkins/)
 
-* `2` `2-debian` `latest`
+* `2-debian` `debian` `2` `latest`
 * `2-ol` `ol`
 
 ## How to run this image ?

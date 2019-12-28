@@ -26,22 +26,18 @@ script:
   # Test containers run
   - travis_retry docker-compose -f docker-compose.test.yml up -d && sleep 60
   - docker-compose -f docker-compose.test.yml ps
-  - docker-compose -f docker-compose.test.yml logs "bitnami-docker-jenkinsdb"
-  - docker-compose -f docker-compose.test.yml ps "bitnami-docker-jenkinsdb" | grep "Up"
   - docker-compose -f docker-compose.test.yml logs "bitnami-docker-jenkins"
   - docker-compose -f docker-compose.test.yml ps "bitnami-docker-jenkins" | grep "Up"
-  - echo 'Wait until containers init and tests are over' && sleep 60
+  - echo 'Wait until containers init and tests are over' && sleep 120
   - docker-compose -f docker-compose.test.yml logs "sut"
   - docker-compose -f docker-compose.test.yml ps "sut" | grep "Exit 0"
   # Test containers can be dropped and restarted
   - docker-compose -f docker-compose.test.yml down
   - travis_retry docker-compose -f docker-compose.test.yml up -d && sleep 60
   - docker-compose -f docker-compose.test.yml ps
-  - docker-compose -f docker-compose.test.yml logs "bitnami-docker-jenkinsdb"
-  - docker-compose -f docker-compose.test.yml ps "bitnami-docker-jenkinsdb" | grep "Up"
   - docker-compose -f docker-compose.test.yml logs "bitnami-docker-jenkins"
   - docker-compose -f docker-compose.test.yml ps "bitnami-docker-jenkins" | grep "Up"
-  - echo 'Wait until containers init and tests are over' && sleep 60
+  - echo 'Wait until containers init and tests are over' && sleep 120
   - docker-compose -f docker-compose.test.yml logs "sut"
   - docker-compose -f docker-compose.test.yml ps "sut" | grep "Exit 0"
 
