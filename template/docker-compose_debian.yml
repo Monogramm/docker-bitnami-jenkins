@@ -27,7 +27,6 @@ services:
     #image: ${IMAGE_NAME}
     container_name: bitnami-docker-jenkins
     hostname: jenkins
-    domainname: jenkins.${DOMAIN}
     restart: always
     #group_add: 
     #  - docker

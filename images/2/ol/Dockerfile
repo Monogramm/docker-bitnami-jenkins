@@ -1,4 +1,4 @@
-FROM bitnami/jenkins:2.204.1-ol-7
+FROM bitnami/jenkins:2.204.1-ol-7-r8
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
 

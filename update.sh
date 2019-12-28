@@ -12,8 +12,8 @@ declare -A base=(
 )
 
 declare -A variant_version=(
-	[debian]='9'
-	[ol]='7'
+	[debian]='9-r0'
+	[ol]='7-r8'
 )
 
 variants=(
