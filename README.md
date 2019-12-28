@@ -3,63 +3,41 @@
 [uri_license_image]: https://img.shields.io/badge/License-AGPL%20v3-blue.svg
 
 [![License: AGPL v3][uri_license_image]][uri_license]
-[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/__app_slug__/)
-[![Build Status](https://travis-ci.org/Monogramm/docker-__app_slug__.svg)](https://travis-ci.org/Monogramm/docker-__app_slug__)
-[![Docker Automated buid](https://img.shields.io/docker/cloud/build/monogramm/docker-__app_slug__.svg)](https://hub.docker.com/r/monogramm/docker-__app_slug__/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-__app_slug__.svg)](https://hub.docker.com/r/monogramm/docker-__app_slug__/)
-[![Docker Version](https://images.microbadger.com/badges/version/monogramm/docker-__app_slug__.svg)](https://microbadger.com/images/monogramm/docker-__app_slug__)
-[![Docker Size](https://images.microbadger.com/badges/image/monogramm/docker-__app_slug__.svg)](https://microbadger.com/images/monogramm/docker-__app_slug__)
-[![GitHub stars](https://img.shields.io/github/stars/Monogramm/docker-__app_slug__?style=social)](https://github.com/Monogramm/docker-__app_slug__)
+[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/bitnami-docker-jenkins/)
+[![Build Status](https://travis-ci.org/Monogramm/docker-bitnami-jenkins.svg)](https://travis-ci.org/Monogramm/docker-bitnami-jenkins)
+[![Docker Automated buid](https://img.shields.io/docker/cloud/build/monogramm/docker-bitnami-jenkins.svg)](https://hub.docker.com/r/monogramm/docker-bitnami-jenkins/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-bitnami-jenkins.svg)](https://hub.docker.com/r/monogramm/docker-bitnami-jenkins/)
+[![Docker Version](https://images.microbadger.com/badges/version/monogramm/docker-bitnami-jenkins.svg)](https://microbadger.com/images/monogramm/docker-bitnami-jenkins)
+[![Docker Size](https://images.microbadger.com/badges/image/monogramm/docker-bitnami-jenkins.svg)](https://microbadger.com/images/monogramm/docker-bitnami-jenkins)
+[![GitHub stars](https://img.shields.io/github/stars/Monogramm/docker-bitnami-jenkins?style=social)](https://github.com/Monogramm/docker-bitnami-jenkins)
 
-<!--
+# **Bitnami Jenkins** Docker image
 
-Template variables to replace in ALL files:
-* __app_name__: Name of the application
-* __app_owner_slug__: GitHub Owner of the original application
-* __app_slug__: GitHub slug of the original application
-* __app_uppercase_slug__: Uppercase value of the GitHub slug
-* __app_description__: Application description
-* __app_url__: Application URL
-* __app_vendor_name__: Uppercase value of the GitHub slug
-
-After replacing all variables:
-* Edit `update.sh` to edit how to retrieve the application latest versions and how to generate images
-* Edit `template/docker-compose_*.yml` to configure your Docker environment for CI
-* Edit `template/test` content for DockerHub custom tests
-
--->
-
-# **__app_name__** Docker image
-
-Docker image for **__app_name__**.
+Docker image for **Bitnami Jenkins**.
 
 :construction: **This image is still in development!**
 
-## What is **__app_name__** ?
+## What is **Bitnami Jenkins** ?
 
-__app_description__
+Custom Docker Image for Bitnami Jenkins.
 
-> [**__app_name__**](__app_url__)
+> [**Jenkins**](https://jenkins.io/)
+> [**Bitnami Jenkins**](https://hub.docker.com/r/bitnami/jenkins/)
 
 ## Supported tags
 
-[Dockerhub monogramm/docker-__app_slug__](https://hub.docker.com/r/monogramm/docker-__app_slug__/)
+[Dockerhub monogramm/docker-bitnami-jenkins](https://hub.docker.com/r/monogramm/docker-bitnami-jenkins/)
 
-* `alpine` `latest`
-* `debian`
+* `2` `2-debian` `latest`
+* `2-ol` `ol`
 
 ## How to run this image ?
 
-<!--
-    If based on official images, refer to official doc:
+See **Bitnami Jenkins** base image documentation for details.
 
-See **__app_name__** base image documentation for details.
+> [**Bitnami Jenkins** GitHub](https://github.com/bitnami/bitnami-docker-jenkins)
 
-> [**__app_name__** GitHub](https://github.com/__app_owner_slug__/__app_slug__)
-
-> [**__app_name__** DockerHub](https://hub.docker.com/r/__app_owner_slug__/docker-__app_slug__-base/)
-
--->
+> [**Bitnami Jenkins** DockerHub](https://hub.docker.com/r/bitnami/jenkins/)
 
 # Questions / Issues
-If you got any questions or problems using the image, please visit our [Github Repository](https://github.com/Monogramm/docker-__app_slug__) and write an issue.
+If you got any questions or problems using the image, please visit our [Github Repository](https://github.com/Monogramm/docker-bitnami-jenkins) and write an issue.

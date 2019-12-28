@@ -1,4 +1,4 @@
-FROM bitnami/bitnami-docker-jenkins:%%VERSION%%-%%VARIANT%%
+FROM bitnami/bitnami-docker-jenkins:2.204.1-ol-7
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
 
@@ -17,7 +17,7 @@ RUN set -ex; \
 ARG TAG
 ARG VCS_REF
 ARG BUILD_DATE
-ARG VERSION=%%VERSION%%
+ARG VERSION=2.204.1
 
 # Container labels (http://label-schema.org/)
 # Container annotations (https://github.com/opencontainers/image-spec)

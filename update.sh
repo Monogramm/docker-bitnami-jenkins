@@ -3,20 +3,25 @@ set -eo pipefail
 
 declare -A compose=(
 	[debian]='debian'
-	[alpine]='alpine'
+	[ol]='ol'
 )
 
 declare -A base=(
 	[debian]='debian'
-	[alpine]='alpine'
+	[ol]='ol'
+)
+
+declare -A variant_version=(
+	[debian]='9'
+	[ol]='7'
 )
 
 variants=(
 	debian
-	alpine
+	ol
 )
 
-min_version='1.0'
+min_version='2'
 
 
 # version_greater_or_equal A B returns whether A >= B
@@ -24,29 +29,28 @@ function version_greater_or_equal() {
 	[[ "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1" || "$1" == "$2" ]];
 }
 
-dockerRepo="monogramm/docker-__app_slug__"
+dockerRepo="monogramm/docker-bitnami-jenkins"
 # Retrieve automatically the latest versions
-#latests=( $( curl -fsSL 'https://api.github.com/repos/__app_owner_slug__/__app_slug__/tags' |tac|tac| \
-#	grep -oE '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+' | \
-#	sort -urV ) )
-latests=( 1.0.0 )
+latests=( $( curl -fsSL 'https://api.github.com/repos/bitnami/bitnami-docker-jenkins/tags' |tac|tac| \
+	grep -oE '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+' | \
+	sort -urV ) )
 
 # Remove existing images
 echo "reset docker images"
-find ./images -maxdepth 1 -type d -regextype sed -regex '\./images/[[:digit:]]\+\.[[:digit:]]\+' -exec rm -r '{}' \;
+find ./images -maxdepth 1 -type d -regextype sed -regex '\./images/[[:digit:]]\+' -exec rm -r '{}' \;
 #rm -rf ./images/*
 
 echo "update docker images"
 travisEnv=
 for latest in "${latests[@]}"; do
-	version=$(echo "$latest" | cut -d. -f1-2)
-
-	if [ -d "$version" ]; then
-		continue
-	fi
+	version=$(echo "$latest" | cut -d. -f1)
 
 	# Only add versions >= "$min_version"
 	if version_greater_or_equal "$version" "$min_version"; then
+
+		if [ -d "images/$version" ]; then
+			continue
+		fi
 
 		for variant in "${variants[@]}"; do
 			echo "Updating $latest [$version-$variant]"
@@ -60,7 +64,7 @@ for latest in "${latests[@]}"; do
 
 			# Replace the variables.
 			sed -ri -e '
-				s/%%VARIANT%%/-'"$variant"'/g;
+				s/%%VARIANT%%/'"$variant-${variant_version[$variant]}"'/g;
 				s/%%VERSION%%/'"$latest"'/g;
 			' "$dir/Dockerfile"
 
