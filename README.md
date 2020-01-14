@@ -3,7 +3,7 @@
 [uri_license_image]: https://img.shields.io/badge/License-AGPL%20v3-blue.svg
 
 [![License: AGPL v3][uri_license_image]][uri_license]
-[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/bitnami-docker-jenkins/)
+[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/docker-bitnami-jenkins/)
 [![Build Status](https://travis-ci.org/Monogramm/docker-bitnami-jenkins.svg)](https://travis-ci.org/Monogramm/docker-bitnami-jenkins)
 [![Docker Automated buid](https://img.shields.io/docker/cloud/build/monogramm/docker-bitnami-jenkins.svg)](https://hub.docker.com/r/monogramm/docker-bitnami-jenkins/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-bitnami-jenkins.svg)](https://hub.docker.com/r/monogramm/docker-bitnami-jenkins/)
