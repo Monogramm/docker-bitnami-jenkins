@@ -11,6 +11,7 @@ RUN set -ex; \
     mkdir -p /usr/local/bin; \
     mv ./docker/docker /usr/local/bin; \
     chmod +x /usr/local/bin/docker; \
+    useradd jenkins; \
     mkdir -p /home/jenkins; \
     chown jenkins:jenkins /home/jenkins; \
     rm -rf /tmp/*
