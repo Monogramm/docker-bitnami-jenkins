@@ -65,7 +65,7 @@ for latest in "${latests[@]}"; do
 			# Replace the variables.
 			sed -ri -e '
 				s/%%VARIANT%%/'"$variant-${variant_version[$variant]}"'/g;
-				s/%%VERSION%%/'"$latest"'/g;
+				s/%%VERSION%%/'"$version"'/g;
 			' "$dir/Dockerfile"
 
 			cp "template/.dockerignore" "$dir/.dockerignore"
