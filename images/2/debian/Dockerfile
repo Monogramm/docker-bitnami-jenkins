@@ -1,4 +1,4 @@
-FROM bitnami/jenkins:2.204.1-debian-9-r0
+FROM bitnami/jenkins:2-debian-10
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
 
@@ -11,13 +11,16 @@ RUN set -ex; \
     mkdir -p /usr/local/bin; \
     mv ./docker/docker /usr/local/bin; \
     chmod +x /usr/local/bin/docker; \
+    useradd jenkins; \
+    mkdir -p /home/jenkins; \
+    chown jenkins:jenkins /home/jenkins; \
     rm -rf /tmp/*
 
 # Arguments to label built container
 ARG TAG
 ARG VCS_REF
 ARG BUILD_DATE
-ARG VERSION=2.204.1
+ARG VERSION=2
 
 # Container labels (http://label-schema.org/)
 # Container annotations (https://github.com/opencontainers/image-spec)

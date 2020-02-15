@@ -12,8 +12,8 @@ declare -A base=(
 )
 
 declare -A variant_version=(
-	[debian]='9-r0'
-	[ol]='7-r24'
+	[debian]='10'
+	[ol]='7'
 )
 
 variants=(
@@ -59,13 +59,13 @@ for latest in "${latests[@]}"; do
 			dir="images/$version/$variant"
 			mkdir -p "$dir"
 
-			template="Dockerfile-${base[$variant]}.template"
+			template="Dockerfile.${base[$variant]}.template"
 			cp "template/$template" "$dir/Dockerfile"
 
 			# Replace the variables.
 			sed -ri -e '
 				s/%%VARIANT%%/'"$variant-${variant_version[$variant]}"'/g;
-				s/%%VERSION%%/'"$latest"'/g;
+				s/%%VERSION%%/'"$version"'/g;
 			' "$dir/Dockerfile"
 
 			cp "template/.dockerignore" "$dir/.dockerignore"
