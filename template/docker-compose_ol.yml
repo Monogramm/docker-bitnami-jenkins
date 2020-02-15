@@ -40,7 +40,7 @@ services:
       - JENKINS_PASSWORD=${JENKINS_ADMIN_PWD}
     volumes:
       - /srv/jenkins/bitnami:/bitnami
-      - /var/run/docker.sock:/var/run/docker.sock
+      #- /var/run/docker.sock:/var/run/docker.sock
       # TODO Mount Maven settings to connect to Nexus and SonarQube
       #- /srv/jenkins/maven:/srv/maven
       - /etc/localtime:/etc/localtime:ro

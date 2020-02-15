@@ -11,10 +11,19 @@ RUN set -ex; \
     mkdir -p /usr/local/bin; \
     mv ./docker/docker /usr/local/bin; \
     chmod +x /usr/local/bin/docker; \
+    systemctl restart docker; \
+    rm -rf /tmp/*; \
+    docker --version; \
+    docker run --rm hello-world; \
+    groupadd docker; \
+    newgrp docker ; \
     useradd jenkins; \
     mkdir -p /home/jenkins; \
     chown jenkins:jenkins /home/jenkins; \
-    rm -rf /tmp/*
+    usermod -aG docker jenkins; \
+    su jenkins; \
+    docker --version; \
+    docker run --rm hello-world
 
 # Arguments to label built container
 ARG TAG
