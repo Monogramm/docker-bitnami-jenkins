@@ -1,7 +1,7 @@
 FROM bitnami/jenkins:2-ol-7
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
-ARG DOCKER_GID=999
+ARG DOCKER_GID=1001
 
 # Install plugins and Docker from official repo
 RUN set -ex; \
