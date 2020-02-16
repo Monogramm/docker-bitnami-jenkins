@@ -1,6 +1,7 @@
 FROM bitnami/jenkins:%%VERSION%%-%%VARIANT%%
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
+ARG DOCKER_GID=999
 
 # Install plugins and Docker from official repo
 RUN set -ex; \
@@ -13,7 +14,7 @@ RUN set -ex; \
     chmod +x /usr/local/bin/docker; \
     rm -rf /tmp/*; \
     docker --version; \
-    groupadd docker; \
+    groupadd docker -g ${DOCKER_GID}; \
     newgrp docker ; \
     useradd jenkins; \
     mkdir -p /home/jenkins; \
