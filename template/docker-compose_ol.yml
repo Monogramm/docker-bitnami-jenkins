@@ -27,11 +27,11 @@ services:
     #image: ${IMAGE_NAME}
     container_name: bitnami-docker-jenkins
     hostname: jenkins
-    restart: always
+    #restart: always
     #group_add: 
     #  - docker
     ports:
-      - '8080:8080'
+      - '8081:8080'
       - '8443:8443'
       - '50000:50000'
     environment:

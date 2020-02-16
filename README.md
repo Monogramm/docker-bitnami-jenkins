@@ -22,6 +22,7 @@ Docker image for **Bitnami Jenkins**.
 Custom Docker Image for Bitnami Jenkins.
 
 > [**Jenkins**](https://jenkins.io/)
+
 > [**Bitnami Jenkins**](https://hub.docker.com/r/bitnami/jenkins/)
 
 ## Supported tags
