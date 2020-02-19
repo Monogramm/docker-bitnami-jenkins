@@ -1,13 +1,14 @@
 FROM bitnami/jenkins:%%VERSION%%-%%VARIANT%%
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
+ARG DOCKER_COMPOSE_VERSION="1.24.1"
 ARG DOCKER_GID=1001
 
 # Install plugins and Docker from official repo
 RUN set -ex; \
     /install-plugins.sh matrix-auth authorize-project ldap git github gitlab artifactory nexus-jenkins sonar; \
     cd /tmp/; \
-    curl -sSL -O https://download.docker.com/linux/static/stable/x86_64/${DOCKER_CLIENT}; \
+    curl -sSL -O "https://download.docker.com/linux/static/stable/x86_64/${DOCKER_CLIENT}"; \
     tar zxf ${DOCKER_CLIENT}; \
     mkdir -p /usr/local/bin; \
     mv ./docker/docker /usr/local/bin; \
@@ -16,6 +17,13 @@ RUN set -ex; \
     docker --version; \
     groupadd docker -g ${DOCKER_GID}; \
     newgrp docker ; \
+    curl -sSL \
+        "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" \
+        -o /usr/local/bin/docker-compose \
+    ; \
+    chmod +x /usr/local/bin/docker-compose; \
+    ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose; \
+    docker-compose --version; \
     useradd jenkins; \
     mkdir -p /home/jenkins; \
     chown jenkins:jenkins /home/jenkins; \
