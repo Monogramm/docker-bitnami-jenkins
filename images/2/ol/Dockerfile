@@ -20,6 +20,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install \
         dpkg \
+        trust \
         wget \
     ; \
     dpkgArch="$(dpkg --print-architecture)"; \
