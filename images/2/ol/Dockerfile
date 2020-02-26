@@ -20,7 +20,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install \
         dpkg \
-        trust \
+        p11-kit \
         wget \
     ; \
     dpkgArch="$(dpkg --print-architecture)"; \
