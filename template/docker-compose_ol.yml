@@ -7,9 +7,9 @@ services:
       context: ./test
       dockerfile: Dockerfile
     depends_on:
-      - bitnami-docker-jenkins
+      - jenkins
     volumes_from:
-      - bitnami-docker-jenkins
+      - jenkins
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
