@@ -18,7 +18,7 @@ ENV JAVA_VERSION=11.0.6 \
 
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
         dpkg \
         p11-kit \
         wget \
