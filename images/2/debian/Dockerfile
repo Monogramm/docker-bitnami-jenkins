@@ -2,7 +2,7 @@ FROM bitnami/jenkins:2-debian-10
 
 # Add JDK (taken from OpenJDK)
 ENV JAVA_HOME=/usr/local/openjdk-11 \
-    PATH=/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    PATH=/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 
 RUN set -eux; \
     { \
