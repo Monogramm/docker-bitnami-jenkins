@@ -93,7 +93,8 @@ RUN set -ex; \
     chown jenkins:jenkins /home/jenkins; \
     usermod -aG docker jenkins; \
     su jenkins; \
-    docker --version
+    docker --version; \
+    docker-compose --version
 
 # Arguments to label built container
 ARG TAG
