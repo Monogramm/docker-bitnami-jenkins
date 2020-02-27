@@ -2,7 +2,7 @@ FROM bitnami/jenkins:2-ol-7
 
 # Add JDK (taken from OpenJDK)
 ENV JAVA_HOME=/usr/local/openjdk-11 \
-    PATH=/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    PATH=/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 
 RUN set -eux; \
     { \
@@ -53,17 +53,6 @@ RUN set -eux; \
     ldconfig; \
     javac --version; \
     java --version
-
-#export GNUPGHOME="$(mktemp -d)"; \
-#gpg --batch --keyserver ha.pool.sks-keyservers.net --keyserver-options no-self-sigs-only --recv-keys CA5F11C6CE22644D42C6AC4492EF8D39DC13168F; \
-#gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys EAC843EBD3EFDB98CC772FADA5CD6035332FA671; \
-#gpg --batch --list-sigs --keyid-format 0xLONG CA5F11C6CE22644D42C6AC4492EF8D39DC13168F \
-#    | tee /dev/stderr \
-#    | grep '0xA5CD6035332FA671' \
-#    | grep 'Andrew Haley'; \
-#gpg --batch --verify openjdk.tgz.asc openjdk.tgz; \
-#gpgconf --kill all; \
-#rm -rf "$GNUPGHOME"; \
 
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
 ARG DOCKER_COMPOSE_VERSION="1.24.1"

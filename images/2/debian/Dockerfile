@@ -49,6 +49,7 @@ RUN set -eux; \
         --no-same-owner \
     ; \
     rm openjdk.tgz*; \
+    mkdir -p /etc/ca-certificates/update.d/; \
     { \
         echo '#!/usr/bin/env bash'; \
         echo 'set -Eeuo pipefail'; \
