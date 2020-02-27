@@ -17,7 +17,7 @@ ENV JAVA_VERSION=11.0.6 \
     JAVA_URL_VERSION=11.0.6_10
 
 RUN set -eux; \
-    dnf install \
+    yum install \
         dpkg \
         p11-kit \
         wget \
