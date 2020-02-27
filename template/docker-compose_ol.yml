@@ -14,7 +14,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
 
-  bitnami-docker-jenkins:
+  jenkins:
     # For development or CI, tag build from local Dockerfile
     build:
       context: ./
@@ -24,8 +24,8 @@ services:
         - VCS_REF=${VCS_REF}
         - BUILD_DATE=${BUILD_DATE}
     # For production, download prebuilt image
-    #image: ${IMAGE_NAME}
-    container_name: bitnami-docker-jenkins
+    image: ${IMAGE_NAME}
+    container_name: jenkins
     hostname: jenkins
     #restart: always
     #group_add: 
@@ -41,7 +41,5 @@ services:
     volumes:
       - /srv/jenkins/bitnami:/bitnami
       - /var/run/docker.sock:/var/run/docker.sock
-      # TODO Mount Maven settings to connect to Nexus and SonarQube
-      #- /srv/jenkins/maven:/srv/maven
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
