@@ -44,6 +44,10 @@ script:
 notifications:
   email: false
 
+matrix:
+  allow_failures:
+    - env: VERSION=2 VARIANT=ol
+
 env: # Environments
     - VERSION=2 VARIANT=ol
     - VERSION=2 VARIANT=debian
