@@ -17,8 +17,7 @@ ENV JAVA_VERSION=11.0.6 \
     JAVA_URL_VERSION=11.0.6_10
 
 RUN set -eux; \
-    apt-get update; \
-    apt-get install \
+    dnf install \
         dpkg \
         p11-kit \
         wget \
