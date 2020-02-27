@@ -5,7 +5,7 @@ set -e
 echo "Waiting to ensure everything is fully ready for the tests..."
 sleep 60
 
-if ! ping -c 10 -q bitnami-docker-jenkins ; then
+if ! ping -c 10 -q jenkins ; then
     echo 'Bitnami Jenkins Main container is not responding!'
     # TODO Display logs to help bug fixing
     #echo 'Check the following logs for details:'
