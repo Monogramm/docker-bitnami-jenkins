@@ -1,5 +1,70 @@
 FROM bitnami/jenkins:2-debian-10
 
+# Add JDK (taken from OpenJDK)
+ENV JAVA_HOME=/usr/local/openjdk-11 \
+    PATH=/usr/local/openjdk-11/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
+
+RUN set -eux; \
+    { \
+        echo '#/bin/sh'; \
+        echo 'echo "$JAVA_HOME"'; \
+    } > /usr/local/bin/docker-java-home \
+    && chmod +x /usr/local/bin/docker-java-home \
+    && [ "$JAVA_HOME" = "$(docker-java-home)" ]
+
+ENV JAVA_VERSION=11.0.6 \
+    JAVA_BASE_URL=https://github.com/AdoptOpenJDK/openjdk11-upstream-binaries/releases/download/jdk-11.0.6%2B10/OpenJDK11U-jdk_ \
+    JAVA_URL_VERSION=11.0.6_10
+
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+        dpkg \
+        p11-kit \
+        wget \
+    ; \
+    dpkgArch="$(dpkg --print-architecture)"; \
+    case "$dpkgArch" in \
+        amd64) upstreamArch='x64' ;; \
+        arm64) upstreamArch='aarch64' ;; \
+        *) echo >&2 "error: unsupported architecture: $dpkgArch" ;; \
+    esac; \
+    wget -O openjdk.tgz.asc "${JAVA_BASE_URL}${upstreamArch}_linux_${JAVA_URL_VERSION}.tar.gz.sign"; \
+    wget -O openjdk.tgz "${JAVA_BASE_URL}${upstreamArch}_linux_${JAVA_URL_VERSION}.tar.gz" --progress=dot:giga; \
+    export GNUPGHOME="$(mktemp -d)"; \
+    gpg --batch --keyserver ha.pool.sks-keyservers.net --keyserver-options no-self-sigs-only --recv-keys CA5F11C6CE22644D42C6AC4492EF8D39DC13168F; \
+    gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys EAC843EBD3EFDB98CC772FADA5CD6035332FA671; \
+    gpg --batch --list-sigs --keyid-format 0xLONG CA5F11C6CE22644D42C6AC4492EF8D39DC13168F \
+        | tee /dev/stderr \
+        | grep '0xA5CD6035332FA671' \
+        | grep 'Andrew Haley'; \
+    gpg --batch --verify openjdk.tgz.asc openjdk.tgz; \
+    gpgconf --kill all; \
+    rm -rf "$GNUPGHOME"; \
+    mkdir -p "$JAVA_HOME"; \
+    tar --extract \
+        --file openjdk.tgz \
+        --directory "$JAVA_HOME" \
+        --strip-components 1 \
+        --no-same-owner \
+    ; \
+    rm openjdk.tgz*; \
+    mkdir -p /etc/ca-certificates/update.d/; \
+    { \
+        echo '#!/usr/bin/env bash'; \
+        echo 'set -Eeuo pipefail'; \
+        echo 'if ! [ -d "$JAVA_HOME" ]; then echo >&2 "error: missing JAVA_HOME environment variable"; exit 1; fi'; \
+        echo 'cacertsFile=; for f in "$JAVA_HOME/lib/security/cacerts" "$JAVA_HOME/jre/lib/security/cacerts"; do if [ -e "$f" ]; then cacertsFile="$f"; break; fi; done'; \
+        echo 'if [ -z "$cacertsFile" ] || ! [ -f "$cacertsFile" ]; then echo >&2 "error: failed to find cacerts file in $JAVA_HOME"; exit 1; fi'; \
+        echo 'trust extract --overwrite --format=java-cacerts --filter=ca-anchors --purpose=server-auth "$cacertsFile"'; \
+    } > /etc/ca-certificates/update.d/docker-openjdk; \
+    chmod +x /etc/ca-certificates/update.d/docker-openjdk; \
+    /etc/ca-certificates/update.d/docker-openjdk; \
+    find "$JAVA_HOME/lib" -name '*.so' -exec dirname '{}' ';' | sort -u > /etc/ld.so.conf.d/docker-openjdk.conf; \
+    ldconfig; \
+    javac --version; \
+    java --version
+
 ARG DOCKER_CLIENT="docker-18.09.9.tgz"
 ARG DOCKER_COMPOSE_VERSION="1.24.1"
 ARG DOCKER_GID=999
@@ -29,7 +94,8 @@ RUN set -ex; \
     chown jenkins:jenkins /home/jenkins; \
     usermod -aG docker jenkins; \
     su jenkins; \
-    docker --version
+    docker --version; \
+    docker-compose --version
 
 # Arguments to label built container
 ARG TAG
